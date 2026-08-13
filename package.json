@@ -1,0 +1,13 @@
+{
+  "name": "pco-pi-harness",
+  "version": "1.0.0",
+  "description": "Personal pi coding-agent harness: extensions and settings",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
