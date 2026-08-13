@@ -23,6 +23,7 @@ pi install git:github.com/pco2699/pco-pi-harness
 | Extension | What it does |
 |-----------|--------------|
 | `thinking` | Adds `/thinking` and `/t` commands to view or change the thinking level (selector or direct value). |
+| `exit` | Adds `/exit` to quit pi (alias for the built-in `/quit`). |
 
 Levels: `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`.
 
