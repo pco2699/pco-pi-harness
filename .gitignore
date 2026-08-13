@@ -1,12 +1,14 @@
 # Secrets and private state — never commit these
 auth.json
 trust.json
+web-search.json
 
 # Session history (may contain sensitive project data)
 sessions/
 
 # Cache and binaries
 models-store.json
+web-search-cache/
 bin/
 
 node_modules/

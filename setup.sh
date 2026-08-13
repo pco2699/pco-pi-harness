@@ -20,12 +20,18 @@ if ! command -v pi >/dev/null 2>&1; then
   npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 fi
 
-echo "==> Installing harness package..."
-if pi list 2>/dev/null | grep -q "$REPO"; then
-  echo "    already installed."
-else
-  pi install "git:$REPO"
-fi
+install_if_missing() {
+  spec="$1"
+  if pi list 2>/dev/null | grep -qF "$spec"; then
+    echo "    already installed: $spec"
+  else
+    pi install "$spec"
+  fi
+}
+
+echo "==> Installing packages..."
+install_if_missing "git:$REPO"
+install_if_missing "npm:pi-web-access"
 
 echo "==> Merging settings into $SETTINGS_FILE ..."
 PI_HARNESS_DEFAULTS="$DEFAULTS" \
@@ -52,5 +58,6 @@ console.log("    Applied: " + Object.keys(defaults).join(", "));
 echo ""
 echo "Done. Your harness is installed and settings are applied."
 echo "Next steps:"
-echo "  1. pi /login   # add your provider credentials on this machine"
-echo "  2. pi          # start a session"
+echo "  1. pi /login                     # add your provider credentials on this machine"
+echo "  2. (optional) ~/.pi/web-search.json   # add web-search API keys (zero-config by default)"
+echo "  3. pi                            # start a session"
