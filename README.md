@@ -43,11 +43,23 @@ you want into `~/.pi/agent/settings.json`:
 
 ## Reproducing the full harness on a new machine
 
+One command installs pi (if needed), installs this package, and merges the
+settings above into `~/.pi/agent/settings.json` (preserving any existing keys):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pco2699/pco-pi-harness/main/setup.sh | sh
+```
+
+Or manually:
+
 ```bash
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 pi install git:github.com/pco2699/pco-pi-harness
 # then apply the settings snippet above and run /login for credentials
 ```
+
+`setup.sh` intentionally does **not** set `defaultProvider` or any credentials —
+those stay per-machine via `/login`.
 
 ## License
 
