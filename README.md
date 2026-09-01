@@ -23,7 +23,7 @@ pi install npm:pi-web-access
 
 | Extension | What it does |
 |-----------|--------------|
-| `thinking` | Adds `/thinking` and `/t` commands to view or change the thinking level (selector or direct value). |
+| `thinking` | Adds `/t` as a short alias for the built-in `/thinking` command (selector or direct value). |
 | `exit` | Adds `/exit` to quit pi (alias for the built-in `/quit`). |
 
 Levels: `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`.

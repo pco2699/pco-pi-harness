@@ -1,13 +1,11 @@
 /**
  * Thinking Level Extension
  *
- * Adds /thinking and /t commands to view and change the current thinking level.
+ * Adds /t as a short alias for the built-in /thinking command.
  *
  * Usage:
- *   /thinking            - show a selector to pick a level
- *   /thinking high       - set the level directly
- *   /t                   - alias for /thinking (no args = selector)
- *   /t max               - set directly
+ *   /t                   - show a selector to pick a level
+ *   /t max               - set the level directly
  *
  * Levels: off, minimal, low, medium, high, xhigh, max
  * The level is clamped to the model's capabilities (non-reasoning models -> "off").
@@ -53,12 +51,6 @@ export default function thinkingExtension(pi: ExtensionAPI) {
     const items = LEVELS.filter((l) => l.startsWith(prefix)).map((l) => ({ value: l, label: l }));
     return items.length > 0 ? items : null;
   };
-
-  pi.registerCommand("thinking", {
-    description: "View or change the thinking level",
-    getArgumentCompletions: argumentCompletions,
-    handler: (args: string, ctx: ExtensionContext) => chooseLevel(args, ctx),
-  });
 
   pi.registerCommand("t", {
     description: "View or change the thinking level (alias for /thinking)",
