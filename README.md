@@ -25,8 +25,15 @@ pi install npm:pi-web-access
 |-----------|--------------|
 | `thinking` | Adds `/t` as a short alias for the built-in `/thinking` command (selector or direct value). |
 | `exit` | Adds `/exit` to quit pi (alias for the built-in `/quit`). |
+| `vim` | Adds a modal prompt editor with Vim-style movement and editing keys. |
 
 Levels: `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, `max`.
+
+The Vim editor starts in normal mode. Press `i`, `a`, `I`, `A`, `o`, or `O` to
+enter insert mode and `Esc` to return to normal mode. Normal mode supports
+`h/j/k/l`, `w`, `b`, `0`, `^`, `$`, `x`, `D`, and `u`. Pressing `Esc` again in
+normal mode preserves pi's cancel/abort behavior; application shortcuts such as
+Ctrl+C and Ctrl+D continue to work in both modes.
 
 ### Packages
 
