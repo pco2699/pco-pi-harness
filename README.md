@@ -71,11 +71,25 @@ you want into `~/.pi/agent/settings.json`:
 }
 ```
 
+### Web search defaults
+
+`pi-web-access` reads `~/.pi/web-search.json` for defaults. This harness sets
+`workflow` to `"auto-summary"` so searches skip the interactive browser curator
+and stream a model-generated summary directly (no `localhost` popup, no 20s idle
+wait). You can still override per-call with `"workflow": "none"` or
+`"summary-review"`.
+
+```json
+{
+  "workflow": "auto-summary"
+}
+```
+
 ## Reproducing the full harness on a new machine
 
 One command installs pi (if needed), installs this package plus `pi-web-access`,
-and merges the settings above into `~/.pi/agent/settings.json` (preserving any
-existing keys):
+and merges the settings and web-search defaults into `~/.pi/agent/settings.json`
+and `~/.pi/web-search.json` (preserving any existing keys):
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/pco2699/pco-pi-harness/master/setup.sh | sh
@@ -87,7 +101,8 @@ Or manually:
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 pi install git:github.com/pco2699/pco-pi-harness
 pi install npm:pi-web-access
-# then apply the settings snippet above and run /login for credentials
+# then apply the settings snippets above, copy web-search.json to ~/.pi/,
+# and run /login for credentials
 ```
 
 `setup.sh` applies the provider/model above but never writes credentials or

@@ -10,6 +10,8 @@ DEFAULTS='{"theme":"dark","defaultProvider":"opencode-go","defaultModel":"deepse
 
 AGENT_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
 SETTINGS_FILE="$AGENT_DIR/settings.json"
+PI_CONFIG_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi}"
+WEB_SEARCH_FILE="$PI_CONFIG_DIR/web-search.json"
 
 echo "==> Checking for pi..."
 if ! command -v pi >/dev/null 2>&1; then
@@ -42,6 +44,28 @@ const fs = require("fs");
 const path = require("path");
 const file = process.env.PI_HARNESS_SETTINGS_FILE;
 const defaults = JSON.parse(process.env.PI_HARNESS_DEFAULTS);
+let current = {};
+if (fs.existsSync(file)) {
+  try {
+    current = JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    console.warn("Warning: " + file + " is not valid JSON; starting fresh.");
+  }
+}
+const merged = Object.assign({}, current, defaults);
+fs.mkdirSync(path.dirname(file), { recursive: true });
+fs.writeFileSync(file, JSON.stringify(merged, null, 2) + "\n");
+console.log("    Applied: " + Object.keys(defaults).join(", "));
+'
+
+echo "==> Merging web-search config into $WEB_SEARCH_FILE ..."
+PI_HARNESS_WEB_SEARCH='{"workflow":"auto-summary"}' \
+PI_HARNESS_WEB_SEARCH_FILE="$WEB_SEARCH_FILE" \
+node -e '
+const fs = require("fs");
+const path = require("path");
+const file = process.env.PI_HARNESS_WEB_SEARCH_FILE;
+const defaults = JSON.parse(process.env.PI_HARNESS_WEB_SEARCH);
 let current = {};
 if (fs.existsSync(file)) {
   try {
