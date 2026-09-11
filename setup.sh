@@ -3,9 +3,10 @@ set -eu
 
 REPO="github.com/pco2699/pco-pi-harness"
 
-# Settings to apply. The provider is implied by the model id (deepseek/...).
-# Credentials and defaultProvider are intentionally NOT set here.
-DEFAULTS='{"theme":"dark","defaultModel":"deepseek/deepseek-v4-pro-0813","defaultThinkingLevel":"xhigh","hideThinkingBlock":true}'
+# Settings to apply. `defaultProvider` is explicit because the same model id can
+# exist on multiple providers, and pi only resolves `defaultModel` when
+# `defaultProvider` is set. Credentials are intentionally NOT set here.
+DEFAULTS='{"theme":"dark","defaultProvider":"opencode-go","defaultModel":"deepseek-v4.1-flash","defaultThinkingLevel":"max","hideThinkingBlock":true}'
 
 AGENT_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
 SETTINGS_FILE="$AGENT_DIR/settings.json"

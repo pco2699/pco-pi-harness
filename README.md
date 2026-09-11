@@ -64,9 +64,9 @@ you want into `~/.pi/agent/settings.json`:
 ```json
 {
   "theme": "dark",
-  "defaultProvider": "openrouter",
-  "defaultModel": "deepseek/deepseek-v4-pro-0813",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4.1-flash",
+  "defaultThinkingLevel": "max",
   "hideThinkingBlock": true
 }
 ```
@@ -90,8 +90,9 @@ pi install npm:pi-web-access
 # then apply the settings snippet above and run /login for credentials
 ```
 
-`setup.sh` intentionally does **not** set `defaultProvider` or any credentials —
-those stay per-machine via `/login`.
+`setup.sh` applies the provider/model above but never writes credentials or
+`auth.json` — run `/login` for `opencode-go` (or set `OPENCODE_API_KEY`) on each
+machine.
 
 ## License
 
